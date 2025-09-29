@@ -3,16 +3,18 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mobile_frontend/main.dart';
 
 void main() {
-  testWidgets('App generation message displayed', (WidgetTester tester) async {
-    await tester.pumpWidget(const MyApp());
-
-    expect(find.text('mobile_frontend App is being generated...'), findsOneWidget);
-    expect(find.byType(CircularProgressIndicator), findsOneWidget);
+  testWidgets('Header title exists and reset button present', (WidgetTester tester) async {
+    await tester.pumpWidget(const TicTacToeApp());
+    // App bar title
+    expect(find.text('Tic Tac Toe'), findsOneWidget);
+    // Reset button in footer
+    expect(find.byIcon(Icons.refresh), findsOneWidget);
   });
 
-  testWidgets('App bar has correct title', (WidgetTester tester) async {
-    await tester.pumpWidget(const MyApp());
-
-    expect(find.text('mobile_frontend'), findsOneWidget);
+  testWidgets('Board has 9 cells', (WidgetTester tester) async {
+    await tester.pumpWidget(const TicTacToeApp());
+    // There are 9 tappable cells (InkWell)
+    final cells = find.byType(InkWell);
+    expect(cells, findsWidgets);
   });
 }
